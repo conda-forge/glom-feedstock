@@ -6,11 +6,11 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 06af5e3486aacc59382ba34e53ebeabd7a9345d78f7dbcbee26f03baa4b83bac
 
 build:
-  number: 0
+  number: 1
   entry_points:
     - glom = glom.cli:console_main
   script: '{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv '
@@ -19,12 +19,12 @@ build:
 requirements:
   host:
     - pip
-    - python >=3.7
+    - python {{ python_min }}
   run:
     - attrs
     - boltons >=19.3.0
     - face ==20.1.1
-    - python >=3.7
+    - python >={{ python_min }}
 
 test:
   source_files:
@@ -39,6 +39,7 @@ test:
     - pip
     - pytest >=6.2.5
     - pyyaml ==5.4.1
+    - python {{ python_min }}
 
 about:
   home: https://github.com/mahmoud/glom
